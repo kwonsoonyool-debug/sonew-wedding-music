@@ -6,7 +6,7 @@ import { Play, Check, Music, Star, ChevronRight, Handshake, Calculator, Calendar
 import Link from "next/link";
 import Image from "next/image";
 
-// --- [데이터 1] 뮤지컬 웨딩 데이터 (영상 + 레퍼토리) ---
+// --- [데이터 1] 뮤지컬 웨딩 데이터 ---
 const musicalData = {
     2: {
         videos: [
@@ -139,26 +139,25 @@ export default function MusicalWeddingPage() {
 
     const { original, final } = calculateTotal();
 
-    // --- 카운트업 애니메이션을 위한 Ref 및 State ---
+    // --- 카운트업 애니메이션 ---
     const priceRef = useRef<HTMLSpanElement>(null);
-    const isInView = useInView(priceRef, { once: false }); // 뷰포트에 들어올 때마다 애니메이션 실행
+    const isInView = useInView(priceRef, { once: false });
 
     useEffect(() => {
         const node = priceRef.current;
         if (node && isInView) {
             const controls = animate(0, final, {
-                duration: 1.2, // 애니메이션 지속 시간
-                ease: "easeOut", // 부드러운 감속 효과
+                duration: 1.2,
+                ease: "easeOut",
                 onUpdate: (value) => {
                     node.textContent = new Intl.NumberFormat('ko-KR').format(Math.floor(value));
                 },
             });
             return () => controls.stop();
         } else if (node && !isInView) {
-            // 뷰포트에서 벗어나면 0으로 초기화 (다시 들어올 때 처음부터 시작)
             node.textContent = "0";
         }
-    }, [final, isInView]); // final 값이 바뀌거나 뷰포트에 들어올 때 실행
+    }, [final, isInView]);
 
     const toggleScene = (scene: string) => {
         setSelectedScenes(prev =>
@@ -201,7 +200,6 @@ export default function MusicalWeddingPage() {
                         SoNew Cinematic Wedding
                     </motion.p>
 
-                    {/* 샤인 이펙트 적용된 타이틀 */}
                     <div className="relative inline-block mb-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
@@ -212,7 +210,6 @@ export default function MusicalWeddingPage() {
                             영화 속 주인공처럼,<br />
                             <span className="text-amber-400 italic">Musical Wedding</span>
                         </motion.h1>
-                        {/* 빛이 지나가는 효과 (Shine Effect) */}
                         <motion.div
                             initial={{ x: "-100%", opacity: 0 }}
                             animate={{ x: "100%", opacity: [0, 1, 0] }}
@@ -236,7 +233,7 @@ export default function MusicalWeddingPage() {
             <section className="py-24 px-4 bg-[#111111]">
                 <div className="max-w-6xl mx-auto space-y-32">
 
-                    {/* Section 2-1: The Protagonist */}
+                    {/* 2-1. The Protagonist */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                             <div className="flex items-center gap-2 text-amber-400 mb-4">
@@ -262,7 +259,7 @@ export default function MusicalWeddingPage() {
                         </motion.div>
                     </div>
 
-                    {/* Section 2-2: Guest Experience */}
+                    {/* 2-2. Guest Experience */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative h-[400px] rounded-2xl overflow-hidden border border-gray-800 order-2 md:order-1">
                             <img
@@ -290,7 +287,7 @@ export default function MusicalWeddingPage() {
                         </motion.div>
                     </div>
 
-                    {/* Section 2-3: The Perfect Team (이미지 확실하게 교체!) */}
+                    {/* 2-3. The Perfect Team (지휘자 이미지 교체) */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                             <div className="flex items-center gap-2 text-amber-400 mb-4">
@@ -316,7 +313,6 @@ export default function MusicalWeddingPage() {
                             </div>
                         </motion.div>
                         <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative h-[400px] rounded-2xl overflow-hidden border border-gray-800">
-                            {/* 마이크 잡은 손 이미지 (안정적인 img 태그 사용) */}
                             <img
                                 src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                                 alt="Director Microphone"
@@ -336,7 +332,6 @@ export default function MusicalWeddingPage() {
                         <h2 className="text-amber-400 text-sm font-bold tracking-widest mb-3 uppercase">Repertoire</h2>
                         <h3 className="text-3xl md:text-4xl font-bold text-white font-serif mb-4">뮤지컬 웨딩 5대 레퍼토리</h3>
 
-                        {/* 3곡 추천 멘트 */}
                         <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 max-w-2xl mx-auto mt-6 flex items-start gap-3 text-left">
                             <Info className="w-6 h-6 text-amber-500 shrink-0 mt-1" />
                             <div>
@@ -369,7 +364,6 @@ export default function MusicalWeddingPage() {
                                 </div>
                                 <h4 className="text-xl font-bold text-white mb-4">{category}</h4>
                                 <ul className="space-y-3">
-                                    {/* 수정됨: repertoire 데이터 구조에 맞게 접근 */}
                                     {musicalData[memberCount].repertoire[category as keyof typeof musicalData[2]['repertoire']].map((song, i) => (
                                         <li key={i} className="text-gray-400 text-sm">
                                             <Link href={song.url} target="_blank" className="flex items-start gap-2 hover:text-amber-400 transition-colors group/link">
@@ -385,7 +379,7 @@ export default function MusicalWeddingPage() {
                 </div>
             </section>
 
-            {/* 4. Recommendation (NEW): 추천 레시피 섹션 (듀얼 버튼) */}
+            {/* 4. Recommendation: 추천 레시피 섹션 */}
             <section className="py-24 px-4 bg-[#111111] border-b border-gray-800">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-16">
@@ -448,7 +442,6 @@ export default function MusicalWeddingPage() {
                     </div>
 
                     <div className="bg-[#111] rounded-3xl border border-gray-800 p-6 md:p-10 shadow-2xl relative overflow-hidden">
-                        {/* 배경 장식 */}
                         <div className="absolute top-0 right-0 p-4 pointer-events-none opacity-20">
                             <Calculator className="w-32 h-32 text-gray-800" />
                         </div>
@@ -505,23 +498,21 @@ export default function MusicalWeddingPage() {
                             </p>
                         </div>
 
-                        {/* Total Price & Benefit */}
+                        {/* Total Price & Benefit (최종 수정: 버튼 및 디자인) */}
                         <div className="border-t border-gray-700 pt-8 flex flex-col items-center gap-6 relative z-10">
                             <p className="text-gray-400 text-sm mb-1">예상 견적 (사회자 포함 할인가)</p>
 
                             <div className="flex items-end gap-4 justify-center">
-                                {/* 정가 표시 (커짐) */}
                                 <span className="text-2xl text-gray-600 line-through decoration-red-500 decoration-2 mb-2">
                                     {original.toLocaleString()}원
                                 </span>
-                                {/* 할인가 표시 (빛나는 효과 + 카운트업 애니메이션) */}
                                 <div className={`text-6xl md:text-7xl font-bold font-serif ${memberCount === 2 ? 'text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.6)]' : 'text-amber-400 drop-shadow-[0_0_25px_rgba(251,191,36,0.6)]'}`}>
                                     <span ref={priceRef}>{final.toLocaleString()}</span> <span className="text-3xl font-normal text-gray-500">원</span>
                                 </div>
                             </div>
 
                             {/* 할인 혜택 강조 & 사회자 버튼 */}
-                            <div className="flex flex-col items-center gap-3">
+                            <div className="flex flex-col items-center gap-3 w-full">
                                 <div className="bg-red-500/10 border border-red-500/50 rounded-full px-6 py-2 flex items-center gap-2 animate-pulse">
                                     <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">추천!</span>
                                     <p className="text-sm text-red-200">
@@ -529,8 +520,8 @@ export default function MusicalWeddingPage() {
                                     </p>
                                 </div>
 
-                                {/* 사회자 보러가기 버튼 (크게 강조) */}
-                                <Link href="https://www.sonewwedding.com/mc" target="_blank" className="...">
+                                {/* 사회자 보러가기 버튼 (링크 적용 완료) */}
+                                <Link href="https://www.sonewwedding.com/mc" target="_blank" className={`flex items-center justify-center gap-2 text-base font-bold px-10 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 mt-2 w-full md:w-auto ${memberCount === 2 ? 'bg-cyan-400 text-black hover:bg-cyan-300 shadow-cyan-400/20' : 'bg-amber-400 text-black hover:bg-amber-300 shadow-amber-400/20'}`}>
                                     <Mic2 className="w-5 h-5" /> 🎙️ 쏘뉴웨딩 전문 사회자 보러가기 <ArrowRight className="w-5 h-5" />
                                 </Link>
                             </div>
@@ -551,7 +542,10 @@ export default function MusicalWeddingPage() {
                         쏘뉴웨딩 뮤지컬 팀과 함께 당신만의 장면을 만드세요.
                     </p>
 
-                    <Link href="https://pf.kakao.com/_BxkaYG/chat" target="_blank" className="...">
+                    <Link
+                        href="https://pf.kakao.com/_BxkaYG/chat"
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-3 bg-[#FEE500] hover:bg-[#FEE500]/90 text-[#3c1e1e] font-bold text-lg px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-amber-400/10"
                     >
                         <Calendar className="w-5 h-5" />
                         스케줄 및 견적 문의하기
