@@ -530,7 +530,7 @@ export default function MusicalWeddingPage() {
                                 </div>
 
                                 {/* 사회자 보러가기 버튼 (크게 강조) */}
-                                <Link href="#" className={`flex items-center justify-center gap-2 text-base font-bold px-8 py-3 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 ${memberCount === 2 ? 'bg-cyan-400 text-black hover:bg-cyan-300 shadow-cyan-400/20' : 'bg-amber-400 text-black hover:bg-amber-300 shadow-amber-400/20'}`}>
+                                <Link href="https://www.sonewwedding.com/mc" target="_blank" className="...">
                                     <Mic2 className="w-5 h-5" /> 🎙️ 쏘뉴웨딩 전문 사회자 보러가기 <ArrowRight className="w-5 h-5" />
                                 </Link>
                             </div>
@@ -551,9 +551,7 @@ export default function MusicalWeddingPage() {
                         쏘뉴웨딩 뮤지컬 팀과 함께 당신만의 장면을 만드세요.
                     </p>
 
-                    <Link
-                        href="#"
-                        className="inline-flex items-center justify-center gap-3 bg-[#FEE500] hover:bg-[#FEE500]/90 text-[#3c1e1e] font-bold text-lg px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-amber-400/10"
+                    <Link href="https://pf.kakao.com/_BxkaYG/chat" target="_blank" className="...">
                     >
                         <Calendar className="w-5 h-5" />
                         스케줄 및 견적 문의하기
