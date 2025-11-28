@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sonew-white: #FAFAFA;
+  --color-sonew-beige: #F5F5DC;
+  --color-sonew-point: #D4AF37;
+  --color-kakao-yellow: #FEE500;
+  --color-text-main: #333333;
+
+  --font-sans: var(--font-noto-sans-kr), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: var(--font-playfair-display), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: var(--color-sonew-white);
+  color: var(--color-text-main);
+}
